@@ -1,0 +1,3624 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>KASHIR POS</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#0b1120;
+    color:#fff;
+}
+
+button,input,select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+    border:0;
+}
+
+.hidden{
+    display:none!important;
+}
+
+input,select{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #34435c;
+    background:#0e1728;
+    color:#fff;
+}
+
+#login{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:linear-gradient(135deg,#080d18,#17233a);
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:#fff;
+    color:#111827;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 20px 70px #0009;
+}
+
+.logo{
+    width:75px;
+    height:75px;
+    margin:auto auto 15px;
+    border-radius:22px;
+    background:#111827;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:38px;
+}
+
+.login-box h1{
+    text-align:center;
+    margin:5px;
+}
+
+.login-box p{
+    text-align:center;
+    color:#667085;
+}
+
+.login-box input{
+    background:#fff;
+    color:#111827;
+    border:1px solid #d0d5dd;
+}
+
+.field{
+    margin:14px 0;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.primary{
+    background:#2563eb;
+    color:#fff;
+    padding:11px 15px;
+    border-radius:10px;
+}
+
+.success{
+    background:#16a34a;
+    color:#fff;
+    padding:10px 14px;
+    border-radius:9px;
+}
+
+.danger{
+    background:#dc2626;
+    color:#fff;
+    padding:9px 12px;
+    border-radius:9px;
+}
+
+.secondary{
+    background:#334155;
+    color:#fff;
+    padding:9px 12px;
+    border-radius:9px;
+}
+
+.full{
+    width:100%;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:#111827;
+    border-bottom:1px solid #29384f;
+    padding:12px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand{
+    font-weight:bold;
+    font-size:20px;
+}
+
+.user{
+    font-size:12px;
+    color:#9ca3af;
+    margin-top:3px;
+}
+
+.wrap{
+    max-width:1350px;
+    margin:auto;
+    padding:15px;
+}
+
+nav{
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    padding-bottom:12px;
+}
+
+nav button{
+    white-space:nowrap;
+    background:#172238;
+    color:#b9c4d5;
+    padding:11px 14px;
+    border-radius:10px;
+}
+
+nav button.active{
+    background:#2563eb;
+    color:#fff;
+}
+
+.page.hide{
+    display:none;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:15px;
+}
+
+.card{
+    background:#121c2e;
+    border:1px solid #27364f;
+    border-radius:16px;
+    padding:17px;
+}
+
+.card .icon{
+    font-size:26px;
+}
+
+.card .title{
+    color:#9aa9bd;
+    margin-top:7px;
+}
+
+.card .value{
+    font-size:22px;
+    font-weight:bold;
+    margin-top:4px;
+}
+
+.panel{
+    background:#121c2e;
+    border:1px solid #27364f;
+    border-radius:16px;
+    padding:17px;
+    margin-bottom:15px;
+}
+
+.panel h2{
+    margin:0 0 15px;
+}
+
+.grid2{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.product{
+    background:#17243a;
+    border:1px solid #2b3b55;
+    padding:15px;
+    border-radius:15px;
+}
+
+.product h3{
+    margin:0 0 8px;
+}
+
+.price{
+    font-size:18px;
+    font-weight:bold;
+    color:#60a5fa;
+    margin:8px 0;
+}
+
+.table{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:11px;
+    border-bottom:1px solid #28364d;
+    text-align:right;
+    white-space:nowrap;
+}
+
+th{
+    color:#9eacc0;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:12px 0;
+    border-bottom:1px solid #28364d;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.total{
+    font-size:23px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.empty{
+    padding:25px;
+    text-align:center;
+    color:#9aa9bd;
+}
+
+.receipt{
+    background:#fff;
+    color:#111;
+    max-width:420px;
+    margin:15px auto;
+    padding:20px;
+    border-radius:10px;
+}
+
+.receipt h2,
+.receipt p{
+    text-align:center;
+}
+
+.rline{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px dashed #aaa;
+}
+
+.toast{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    right:20px;
+    max-width:450px;
+    margin:auto;
+    background:#111827;
+    border:1px solid #3b4b66;
+    padding:13px;
+    border-radius:12px;
+    z-index:100;
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:7px;
+    font-size:12px;
+    background:#334155;
+}
+
+.badge.admin{
+    background:#7c3aed;
+}
+
+.badge.cashier{
+    background:#0369a1;
+}
+
+@media(max-width:900px){
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .cards,
+    .products,
+    .grid2{
+        grid-template-columns:1fr;
+    }
+
+    .wrap{
+        padding:10px;
+    }
+}
+
+@media print{
+    body *{
+        visibility:hidden!important;
+    }
+
+    .receipt,
+    .receipt *{
+        visibility:visible!important;
+    }
+
+    .receipt{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div id="login">
+
+<div class="login-box">
+
+<div class="logo">🧾</div>
+
+<h1>KASHIR POS</h1>
+
+<p>سیستەمی کاشێر و فرۆشتن</p>
+
+<div class="field">
+
+<label>ناوی بەکارهێنەر</label>
+
+<input
+id="loginUser"
+value="admin"
+autocomplete="username">
+
+</div>
+
+<div class="field">
+
+<label>وشەی نهێنی</label>
+
+<input
+id="loginPass"
+type="password"
+placeholder="1234"
+autocomplete="current-password">
+
+</div>
+
+<button
+class="primary full"
+onclick="login()">
+
+🔐 چوونەژوورەوە
+
+</button>
+
+<div
+id="loginError"
+style="color:#dc2626;text-align:center;margin-top:10px">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- APP -->
+
+<div id="app" class="hidden">
+
+<header>
+
+<div>
+
+<div class="brand">
+🧾 KASHIR POS
+</div>
+
+<div
+class="user"
+id="currentUser">
+</div>
+
+</div>
+
+<button
+class="danger"
+onclick="logout()">
+
+دەرچوون
+
+</button>
+
+</header>
+
+
+<div class="wrap">
+
+<nav>
+
+<button
+data-page="home"
+class="active"
+onclick="page('home',this)">
+🏠 سەرەکی
+</button>
+
+<button
+data-page="pos"
+onclick="page('pos',this)">
+🛒 فرۆشتن
+</button>
+
+<button
+data-page="products"
+onclick="page('products',this)">
+📦 کاڵاکان
+</button>
+
+<button
+data-page="customers"
+onclick="page('customers',this)">
+👥 کڕیار
+</button>
+
+<button
+data-page="debts"
+onclick="page('debts',this)">
+💳 قەرز
+</button>
+
+<button
+data-page="suppliers"
+class="adminOnly"
+onclick="page('suppliers',this)">
+🚚 دابینکەر
+</button>
+
+<button
+data-page="expenses"
+class="adminOnly"
+onclick="page('expenses',this)">
+💸 خەرجی
+</button>
+
+<button
+data-page="employees"
+class="adminOnly"
+onclick="page('employees',this)">
+👨‍💼 کارمەند
+</button>
+
+<button
+data-page="reports"
+class="adminOnly"
+onclick="page('reports',this)">
+📊 ڕاپۆرت
+</button>
+
+<button
+data-page="settings"
+class="adminOnly"
+onclick="page('settings',this)">
+⚙️ ڕێکخستن
+</button>
+
+<!-- BACKUP بۆ هەردووکیان -->
+
+<button onclick="backup()">
+💾 Backup
+</button>
+
+<!-- RESTORE بۆ هەردووکیان -->
+
+<button onclick="openRestore()">
+📤 Restore
+</button>
+
+</nav>
+
+
+<!-- HOME -->
+
+<section id="home" class="page">
+
+<div class="cards">
+
+<div class="card">
+
+<div class="icon">💰</div>
+
+<div class="title">
+کۆی فرۆشتن
+</div>
+
+<div
+class="value"
+id="statSales">
+0
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">📦</div>
+
+<div class="title">
+کاڵاکان
+</div>
+
+<div
+class="value"
+id="statProducts">
+0
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🛒</div>
+
+<div class="title">
+مامەڵەکان
+</div>
+
+<div
+class="value"
+id="statOrders">
+0
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">💳</div>
+
+<div class="title">
+قەرزی ماوە
+</div>
+
+<div
+class="value"
+id="statDebt">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>
+📋 دوایین فرۆشتنەکان
+</h2>
+
+<div class="table">
+
+<table>
+
+<thead>
+
+<tr>
+<th>کاڵا</th>
+<th>کۆیی</th>
+<th>بەروار</th>
+</tr>
+
+</thead>
+
+<tbody id="homeSales">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- POS -->
+
+<section id="pos" class="page hide">
+
+<div class="grid2">
+
+<div class="panel">
+
+<h2>
+🛒 کاڵاکان
+</h2>
+
+<input
+id="posSearch"
+placeholder="🔎 گەڕان..."
+oninput="renderPOS()">
+
+<div
+id="posProducts"
+class="products"
+style="margin-top:12px">
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>
+🧺 سەبەتە
+</h2>
+
+<div id="cart"></div>
+
+<div class="total">
+
+کۆی گشتی:
+
+<span id="cartTotal">
+0 د.ع
+</span>
+
+</div>
+
+<button
+class="success full"
+onclick="checkout()">
+
+💵 تەواوکردنی فرۆشتن
+
+</button>
+
+<button
+class="secondary full"
+style="margin-top:8px"
+onclick="clearCart()">
+
+🗑️ پاککردنەوە
+
+</button>
+
+</div>
+
+</div>
+
+<div id="receipt"></div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section id="products" class="page hide">
+
+<div class="panel">
+
+<h2>
+📦 کاڵاکان
+</h2>
+
+<input
+id="productSearch"
+placeholder="🔎 گەڕان..."
+oninput="renderProducts()">
+
+<div
+id="productTable"
+style="margin-top:12px">
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>
+➕ زیادکردنی کاڵا
+</h2>
+
+<div class="grid2">
+
+<div>
+
+<label>ناوی کاڵا</label>
+
+<input id="pName">
+
+</div>
+
+
+<div>
+
+<label>جۆر</label>
+
+<select id="pType">
+
+<option>مۆبایل</option>
+<option>کۆمپیوتەر</option>
+<option>لەپتۆپ</option>
+<option>تابلێت</option>
+<option>ئاکسسۆری</option>
+<option>تر</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>نرخ</label>
+
+<input
+id="pPrice"
+type="number">
+
+</div>
+
+
+<div>
+
+<label>ژمارە</label>
+
+<input
+id="pStock"
+type="number">
+
+</div>
+
+
+<div>
+
+<label>بارکۆد</label>
+
+<input id="pBarcode">
+
+</div>
+
+</div>
+
+
+<button
+class="primary"
+style="margin-top:12px"
+onclick="addProduct()">
+
+➕ زیادکردن
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- CUSTOMERS -->
+
+<section id="customers" class="page hide">
+
+<div class="panel">
+
+<h2>👥 کڕیارەکان</h2>
+
+<div id="customerTable"></div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>➕ زیادکردنی کڕیار</h2>
+
+<div class="grid2">
+
+<div>
+
+<label>ناو</label>
+
+<input id="cName">
+
+</div>
+
+<div>
+
+<label>مۆبایل</label>
+
+<input id="cPhone">
+
+</div>
+
+</div>
+
+<button
+class="primary"
+style="margin-top:12px"
+onclick="addCustomer()">
+
+➕ زیادکردن
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- DEBTS -->
+
+<section id="debts" class="page hide">
+
+<div class="panel">
+
+<h2>💳 قەرزەکان</h2>
+
+<div id="debtTable"></div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>➕ تۆمارکردنی قەرز</h2>
+
+<div class="grid2">
+
+<div>
+
+<label>ناوی کڕیار</label>
+
+<input id="dCustomer">
+
+</div>
+
+<div>
+
+<label>بڕی قەرز</label>
+
+<input
+id="dAmount"
+type="number">
+
+</div>
+
+</div>
+
+<button
+class="primary"
+style="margin-top:12px"
+onclick="addDebt()">
+
+➕ تۆمارکردن
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- SUPPLIERS -->
+
+<section id="suppliers" class="page hide">
+
+<div class="panel">
+
+<h2>🚚 دابینکەرەکان</h2>
+
+<div id="supplierTable"></div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>➕ زیادکردنی دابینکەر</h2>
+
+<div class="grid2">
+
+<div>
+
+<label>ناو</label>
+
+<input id="sName">
+
+</div>
+
+<div>
+
+<label>مۆبایل</label>
+
+<input id="sPhone">
+
+</div>
+
+</div>
+
+<button
+class="primary"
+style="margin-top:12px"
+onclick="addSupplier()">
+
+➕ زیادکردن
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- EXPENSES -->
+
+<section id="expenses" class="page hide">
+
+<div class="panel">
+
+<h2>💸 خەرجییەکان</h2>
+
+<div id="expenseTable"></div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>➕ خەرجی نوێ</h2>
+
+<div class="grid2">
+
+<div>
+
+<label>بۆچی؟</label>
+
+<input id="eTitle">
+
+</div>
+
+<div>
+
+<label>بڕ</label>
+
+<input
+id="eAmount"
+type="number">
+
+</div>
+
+</div>
+
+<button
+class="primary"
+style="margin-top:12px"
+onclick="addExpense()">
+
+➕ تۆمارکردن
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- EMPLOYEES -->
+
+<section id="employees" class="page hide">
+
+<div class="panel">
+
+<h2>👨‍💼 کارمەندان</h2>
+
+<div id="employeeTable"></div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>➕ زیادکردنی کاشێر</h2>
+
+<div class="grid2">
+
+<div>
+
+<label>ناوی کارمەند</label>
+
+<input id="emName">
+
+</div>
+
+<div>
+
+<label>Username</label>
+
+<input id="emUser">
+
+</div>
+
+<div>
+
+<label>Password</label>
+
+<input
+id="emPass"
+type="password">
+
+</div>
+
+</div>
+
+<button
+class="primary"
+style="margin-top:12px"
+onclick="addCashier()">
+
+➕ زیادکردنی کاشێر
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- REPORTS -->
+
+<section id="reports" class="page hide">
+
+<div class="cards">
+
+<div class="card">
+
+<div class="icon">💰</div>
+
+<div class="title">
+فرۆشتن
+</div>
+
+<div
+class="value"
+id="repSales">
+0
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">💸</div>
+
+<div class="title">
+خەرجی
+</div>
+
+<div
+class="value"
+id="repExpenses">
+0
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">📈</div>
+
+<div class="title">
+قازانج
+</div>
+
+<div
+class="value"
+id="repProfit">
+0
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🛒</div>
+
+<div class="title">
+مامەڵە
+</div>
+
+<div
+class="value"
+id="repOrders">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>
+📊 مێژووی فرۆشتن
+</h2>
+
+<div id="reportTable"></div>
+
+</div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section id="settings" class="page hide">
+
+<div class="panel">
+
+<h2>
+⚙️ Backup / Restore
+</h2>
+
+<p>
+Admin و Cashier هەردووکیان دەتوانن Backup و Restore بکەن.
+</p>
+
+<button
+class="primary"
+onclick="backup()">
+
+📥 Backup
+
+</button>
+
+<br><br>
+
+<button
+class="success"
+onclick="openRestore()">
+
+📤 Restore
+
+</button>
+
+<input
+id="restoreFile"
+type="file"
+accept=".json"
+style="display:none"
+onchange="restore(this.files[0])">
+
+</div>
+
+
+<div class="panel">
+
+<h2>
+🔐 گۆڕینی وشەی نهێنی Admin
+</h2>
+
+<div class="grid2">
+
+<div>
+
+<label>وشەی نوێ</label>
+
+<input
+id="newPass"
+type="password">
+
+</div>
+
+
+<div>
+
+<label>دووبارە</label>
+
+<input
+id="newPass2"
+type="password">
+
+</div>
+
+</div>
+
+<button
+class="primary"
+style="margin-top:12px"
+onclick="changeAdminPassword()">
+
+🔐 گۆڕین
+
+</button>
+
+</div>
+
+
+<div class="panel">
+
+<h2>
+⚠️ داتا
+</h2>
+
+<button
+class="danger"
+onclick="resetAll()">
+
+🗑️ سڕینەوەی هەموو داتا
+
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+
+<div
+id="toast"
+class="toast hidden">
+</div>
+
+
+<script>
+
+/* ===============================
+   DATABASE
+================================ */
+
+const DEFAULT_DB = {
+
+products:[
+{
+id:1,
+name:"iPhone 15",
+type:"مۆبایل",
+price:1200000,
+stock:5,
+barcode:"1001"
+},
+{
+id:2,
+name:"Samsung S24",
+type:"مۆبایل",
+price:1100000,
+stock:7,
+barcode:"1002"
+},
+{
+id:3,
+name:"HP Laptop",
+type:"لەپتۆپ",
+price:950000,
+stock:3,
+barcode:"1003"
+},
+{
+id:4,
+name:"Mouse",
+type:"ئاکسسۆری",
+price:25000,
+stock:20,
+barcode:"1004"
+}
+],
+
+customers:[],
+suppliers:[],
+expenses:[],
+debts:[],
+
+employees:[
+{
+id:1,
+name:"بەڕێوەبەر",
+user:"admin",
+password:"1234",
+role:"admin"
+}
+],
+
+sales:[]
+
+};
+
+
+let db;
+
+try{
+
+db = JSON.parse(
+localStorage.getItem("KASHIR_POS_DB")
+);
+
+}catch(e){
+
+db = null;
+
+}
+
+if(!db){
+
+db = JSON.parse(
+JSON.stringify(DEFAULT_DB)
+);
+
+save();
+
+}
+
+let cart=[];
+let currentUser=null;
+
+
+/* ===============================
+   SAVE
+================================ */
+
+function save(){
+
+localStorage.setItem(
+"KASHIR_POS_DB",
+JSON.stringify(db)
+);
+
+}
+
+
+/* ===============================
+   LOGIN
+================================ */
+
+function login(){
+
+const user =
+document.getElementById("loginUser")
+.value
+.trim();
+
+const pass =
+document.getElementById("loginPass")
+.value;
+
+const employee =
+db.employees.find(
+x =>
+x.user===user &&
+x.password===pass
+);
+
+if(!employee){
+
+document.getElementById("loginError")
+.textContent =
+"❌ Username یان Password هەڵەیە";
+
+return;
+
+}
+
+currentUser=employee;
+
+sessionStorage.setItem(
+"KASHIR_LOGIN",
+JSON.stringify(employee)
+);
+
+document.getElementById("login")
+.classList.add("hidden");
+
+document.getElementById("app")
+.classList.remove("hidden");
+
+showUser();
+
+applyPermissions();
+
+renderAll();
+
+}
+
+
+/* ===============================
+   SHOW USER
+================================ */
+
+function showUser(){
+
+document.getElementById(
+"currentUser"
+).innerHTML =
+`${esc(currentUser.name)}
+-
+<span class="badge ${currentUser.role}">
+${
+currentUser.role==="admin"
+?
+"👑 Admin"
+:
+"🧑‍💼 Cashier"
+}
+</span>`;
+
+}
+
+
+/* ===============================
+   PERMISSIONS
+================================ */
+
+function applyPermissions(){
+
+const admin=isAdmin();
+
+document
+.querySelectorAll(".adminOnly")
+.forEach(el=>{
+el.style.display =
+admin ? "" : "none";
+});
+
+}
+
+
+/* ===============================
+   PAGE
+================================ */
+
+function page(id,btn){
+
+const adminPages=[
+"suppliers",
+"expenses",
+"employees",
+"reports",
+"settings"
+];
+
+if(
+adminPages.includes(id) &&
+!isAdmin()
+){
+
+notify(
+"❌ ئەم بەشە تەنها بۆ Admin ـە"
+);
+
+return;
+
+}
+
+document
+.querySelectorAll(".page")
+.forEach(x=>
+x.classList.add("hide")
+);
+
+const target =
+document.getElementById(id);
+
+if(!target)return;
+
+target.classList.remove("hide");
+
+document
+.querySelectorAll("nav button")
+.forEach(x=>
+x.classList.remove("active")
+);
+
+if(btn)
+btn.classList.add("active");
+
+renderAll();
+
+}
+
+
+/* ===============================
+   LOGOUT
+================================ */
+
+function logout(){
+
+sessionStorage.removeItem(
+"KASHIR_LOGIN"
+);
+
+location.reload();
+
+}
+
+
+/* ===============================
+   HELPERS
+================================ */
+
+function isAdmin(){
+
+return currentUser &&
+currentUser.role==="admin";
+
+}
+
+
+function money(n){
+
+return Number(n||0)
+.toLocaleString("en-US")
++" د.ع";
+
+}
+
+
+function esc(v){
+
+return String(v??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+function notify(text){
+
+const t =
+document.getElementById("toast");
+
+t.textContent=text;
+
+t.classList.remove("hidden");
+
+setTimeout(
+()=>{
+t.classList.add("hidden");
+},
+2500
+);
+
+}
+
+
+/* ===============================
+   PRODUCTS
+================================ */
+
+function addProduct(){
+
+if(!currentUser){
+
+notify(
+"❌ تکایە بچۆ ژوورەوە"
+);
+
+return;
+
+}
+
+const name =
+document.getElementById("pName")
+.value.trim();
+
+const type =
+document.getElementById("pType")
+.value;
+
+const price =
+Number(
+document.getElementById("pPrice")
+.value
+);
+
+const stock =
+Number(
+document.getElementById("pStock")
+.value
+);
+
+const barcode =
+document.getElementById("pBarcode")
+.value.trim();
+
+if(
+!name ||
+price<=0 ||
+stock<0
+){
+
+notify(
+"❌ زانیارییەکان بە دروستی پڕ بکە"
+);
+
+return;
+
+}
+
+db.products.push({
+
+id:Date.now(),
+name,
+type,
+price,
+stock,
+barcode,
+addedBy:currentUser.name,
+date:new Date().toISOString()
+
+});
+
+save();
+
+document.getElementById("pName").value="";
+document.getElementById("pPrice").value="";
+document.getElementById("pStock").value="";
+document.getElementById("pBarcode").value="";
+
+notify("✅ کاڵا زیادکرا");
+
+renderAll();
+
+}
+
+
+function deleteProduct(id){
+
+if(!isAdmin()){
+
+notify(
+"❌ تەنها Admin دەتوانێت کاڵا بسڕێتەوە"
+);
+
+return;
+
+}
+
+const product =
+db.products.find(
+p=>p.id===id
+);
+
+if(!product)return;
+
+if(
+!confirm(
+`دڵنیایت لە سڕینەوەی "${product.name}"؟`
+)
+)return;
+
+db.products =
+db.products.filter(
+p=>p.id!==id
+);
+
+save();
+
+notify(
+"🗑️ کاڵا سڕدرایەوە"
+);
+
+renderAll();
+
+}
+
+
+function renderProducts(){
+
+const box =
+document.getElementById(
+"productTable"
+);
+
+if(!box)return;
+
+const search =
+(
+document.getElementById(
+"productSearch"
+)?.value || ""
+).toLowerCase();
+
+const list =
+db.products.filter(
+p =>
+p.name.toLowerCase()
+.includes(search)
+||
+String(p.barcode||"")
+.includes(search)
+);
+
+if(!list.length){
+
+box.innerHTML=`
+
+<div class="empty">
+📦 هیچ کاڵایەک نییە
+</div>
+
+`;
+
+return;
+
+}
+
+box.innerHTML=`
+
+<div class="table">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ناو</th>
+<th>جۆر</th>
+<th>نرخ</th>
+<th>کۆگا</th>
+<th>بارکۆد</th>
+<th>کردار</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${list.map(p=>`
+
+<tr>
+
+<td>${esc(p.name)}</td>
+
+<td>${esc(p.type)}</td>
+
+<td>${money(p.price)}</td>
+
+<td>${p.stock}</td>
+
+<td>${esc(p.barcode||"-")}</td>
+
+<td>
+
+${
+isAdmin()
+?
+`
+<button
+class="danger"
+onclick="deleteProduct(${p.id})">
+
+🗑️ سڕینەوە
+
+</button>
+`
+:
+`
+<span class="badge cashier">
+تەنها بینین
+</span>
+`
+}
+
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* ===============================
+   POS
+================================ */
+
+function renderPOS(){
+
+const box =
+document.getElementById(
+"posProducts"
+);
+
+if(!box)return;
+
+const search =
+(
+document.getElementById(
+"posSearch"
+)?.value || ""
+).toLowerCase();
+
+const list =
+db.products.filter(
+p =>
+p.name.toLowerCase()
+.includes(search)
+||
+String(p.barcode||"")
+.includes(search)
+);
+
+box.innerHTML =
+list.map(p=>`
+
+<div class="product">
+
+<h3>
+📱 ${esc(p.name)}
+</h3>
+
+<small>
+${esc(p.type)}
+</small>
+
+<div class="price">
+${money(p.price)}
+</div>
+
+<small>
+کۆگا: ${p.stock}
+</small>
+
+<button
+class="success full"
+style="margin-top:10px"
+onclick="addCart(${p.id})"
+${p.stock<=0?"disabled":""}>
+
+➕ زیادکردن
+
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+function addCart(id){
+
+const p =
+db.products.find(
+x=>x.id===id
+);
+
+if(!p || p.stock<=0){
+
+notify(
+"❌ کاڵا لە کۆگا نییە"
+);
+
+return;
+
+}
+
+const item =
+cart.find(
+x=>x.id===id
+);
+
+if(item){
+
+if(item.qty>=p.stock){
+
+notify(
+"❌ ئەو ژمارەیە لە کۆگا نییە"
+);
+
+return;
+
+}
+
+item.qty++;
+
+}else{
+
+cart.push({
+id:id,
+qty:1
+});
+
+}
+
+renderCart();
+
+}
+
+
+function changeQty(id,n){
+
+const item =
+cart.find(
+x=>x.id===id
+);
+
+const p =
+db.products.find(
+x=>x.id===id
+);
+
+if(!item || !p)return;
+
+item.qty += n;
+
+if(item.qty<=0){
+
+cart =
+cart.filter(
+x=>x.id!==id
+);
+
+}
+
+if(item.qty>p.stock){
+
+item.qty=p.stock;
+
+}
+
+renderCart();
+
+}
+
+
+function removeCart(id){
+
+cart =
+cart.filter(
+x=>x.id!==id
+);
+
+renderCart();
+
+}
+
+
+function getCartTotal(){
+
+return cart.reduce(
+(sum,item)=>{
+
+const p =
+db.products.find(
+x=>x.id===item.id
+);
+
+return sum+
+(
+p ?
+p.price*item.qty :
+0
+);
+
+},
+0
+);
+
+}
+
+
+function renderCart(){
+
+const box =
+document.getElementById("cart");
+
+if(!box)return;
+
+if(!cart.length){
+
+box.innerHTML=`
+
+<div class="empty">
+سەبەتە بەتاڵە
+</div>
+
+`;
+
+document.getElementById(
+"cartTotal"
+).textContent="0 د.ع";
+
+return;
+
+}
+
+box.innerHTML =
+cart.map(item=>{
+
+const p =
+db.products.find(
+x=>x.id===item.id
+);
+
+return `
+
+<div class="cart-item">
+
+<div>
+
+<b>${esc(p.name)}</b>
+
+<br>
+
+<small>
+${money(p.price)}
+</small>
+
+</div>
+
+<div class="qty">
+
+<button
+class="secondary"
+onclick="changeQty(${p.id},-1)">
+−
+</button>
+
+<b>${item.qty}</b>
+
+<button
+class="secondary"
+onclick="changeQty(${p.id},1)">
++
+</button>
+
+<button
+class="danger"
+onclick="removeCart(${p.id})">
+🗑️
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+document.getElementById(
+"cartTotal"
+).textContent =
+money(getCartTotal());
+
+}
+
+
+function clearCart(){
+
+cart=[];
+
+renderCart();
+
+}
+
+
+/* ===============================
+   CHECKOUT
+================================ */
+
+function checkout(){
+
+if(!cart.length){
+
+notify(
+"❌ سەبەتە بەتاڵە"
+);
+
+return;
+
+}
+
+for(const item of cart){
+
+const p =
+db.products.find(
+x=>x.id===item.id
+);
+
+if(!p || p.stock<item.qty){
+
+notify(
+"❌ کۆگا بەس نییە"
+);
+
+return;
+
+}
+
+}
+
+const items =
+cart.map(item=>{
+
+const p =
+db.products.find(
+x=>x.id===item.id
+);
+
+p.stock -= item.qty;
+
+return {
+name:p.name,
+price:p.price,
+qty:item.qty,
+total:p.price*item.qty
+};
+
+});
+
+const total =
+items.reduce(
+(s,x)=>s+x.total,
+0
+);
+
+const sale={
+
+id:Date.now(),
+items:items,
+total:total,
+cashier:currentUser.name,
+date:new Date().toISOString()
+
+};
+
+db.sales.unshift(sale);
+
+save();
+
+cart=[];
+
+renderAll();
+
+showReceipt(sale);
+
+notify(
+"✅ فرۆشتن تۆمارکرا"
+);
+
+}
+
+
+function showReceipt(sale){
+
+document.getElementById(
+"receipt"
+).innerHTML=`
+
+<div class="receipt">
+
+<h2>
+🧾 KASHIR POS
+</h2>
+
+<p>
+پسوڵەی فرۆشتن
+</p>
+
+<p>
+کاشێر:
+${esc(sale.cashier)}
+</p>
+
+${sale.items.map(x=>`
+
+<div class="rline">
+
+<span>
+${esc(x.name)} × ${x.qty}
+</span>
+
+<b>
+${money(x.total)}
+</b>
+
+</div>
+
+`).join("")}
+
+<div class="rline">
+
+<b>کۆی گشتی</b>
+
+<b>${money(sale.total)}</b>
+
+</div>
+
+<p>
+${new Date(sale.date)
+.toLocaleString("ku-IQ")}
+</p>
+
+<button
+class="primary full"
+onclick="window.print()">
+
+🖨️ چاپکردن
+
+</button>
+
+</div>
+
+`;
+
+}
+
+
+/* ===============================
+   CUSTOMERS
+================================ */
+
+function addCustomer(){
+
+const name =
+document.getElementById("cName")
+.value.trim();
+
+const phone =
+document.getElementById("cPhone")
+.value.trim();
+
+if(!name){
+
+notify(
+"❌ ناوی کڕیار بنووسە"
+);
+
+return;
+
+}
+
+db.customers.push({
+
+id:Date.now(),
+name:name,
+phone:phone,
+createdBy:currentUser.name
+
+});
+
+save();
+
+document.getElementById("cName").value="";
+document.getElementById("cPhone").value="";
+
+notify("✅ کڕیار زیادکرا");
+
+renderCustomers();
+
+}
+
+
+function renderCustomers(){
+
+const box =
+document.getElementById(
+"customerTable"
+);
+
+if(!box)return;
+
+if(!db.customers.length){
+
+box.innerHTML=`
+
+<div class="empty">
+کڕیار نییە
+</div>
+
+`;
+
+return;
+
+}
+
+box.innerHTML=`
+
+<div class="table">
+
+<table>
+
+<thead>
+
+<tr>
+<th>ناو</th>
+<th>مۆبایل</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+${db.customers.map(c=>`
+
+<tr>
+
+<td>${esc(c.name)}</td>
+
+<td>${esc(c.phone||"-")}</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* ===============================
+   DEBTS
+================================ */
+
+function addDebt(){
+
+const customer =
+document.getElementById("dCustomer")
+.value.trim();
+
+const amount =
+Number(
+document.getElementById("dAmount")
+.value
+);
+
+if(!customer || amount<=0){
+
+notify(
+"❌ زانیارییەکان هەڵەن"
+);
+
+return;
+
+}
+
+db.debts.push({
+
+id:Date.now(),
+customer:customer,
+amount:amount,
+paid:false,
+date:new Date().toISOString(),
+createdBy:currentUser.name
+
+});
+
+save();
+
+document.getElementById("dCustomer").value="";
+document.getElementById("dAmount").value="";
+
+notify(
+"✅ قەرز تۆمارکرا"
+);
+
+renderDebts();
+
+}
+
+
+function payDebt(id){
+
+const d =
+db.debts.find(
+x=>x.id===id
+);
+
+if(!d)return;
+
+d.paid=true;
+
+d.paidBy=currentUser.name;
+
+d.paidDate=
+new Date().toISOString();
+
+save();
+
+renderDebts();
+
+notify(
+"✅ قەرز پارەدرا"
+);
+
+}
+
+
+function deleteDebt(id){
+
+if(!isAdmin()){
+
+notify(
+"❌ تەنها Admin"
+);
+
+return;
+
+}
+
+db.debts =
+db.debts.filter(
+x=>x.id!==id
+);
+
+save();
+
+renderDebts();
+
+}
+
+
+function renderDebts(){
+
+const box =
+document.getElementById(
+"debtTable"
+);
+
+if(!box)return;
+
+if(!db.debts.length){
+
+box.innerHTML=`
+
+<div class="empty">
+قەرز نییە
+</div>
+
+`;
+
+return;
+
+}
+
+box.innerHTML=`
+
+<div class="table">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>کڕیار</th>
+<th>بڕ</th>
+<th>دۆخ</th>
+<th>کردار</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${db.debts.map(d=>`
+
+<tr>
+
+<td>${esc(d.customer)}</td>
+
+<td>${money(d.amount)}</td>
+
+<td>
+${
+d.paid
+?
+"✅ پارەدراوە"
+:
+"⏳ ماوە"
+}
+</td>
+
+<td>
+
+${
+!d.paid
+?
+`
+<button
+class="success"
+onclick="payDebt(${d.id})">
+
+💵 پارەدان
+
+</button>
+`
+:
+""
+}
+
+${
+isAdmin()
+?
+`
+<button
+class="danger"
+onclick="deleteDebt(${d.id})">
+
+🗑️
+
+</button>
+`
+:
+""
+}
+
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* ===============================
+   SUPPLIERS
+================================ */
+
+function addSupplier(){
+
+if(!isAdmin())return;
+
+const name =
+document.getElementById("sName")
+.value.trim();
+
+const phone =
+document.getElementById("sPhone")
+.value.trim();
+
+if(!name)return;
+
+db.suppliers.push({
+
+id:Date.now(),
+name:name,
+phone:phone
+
+});
+
+save();
+
+document.getElementById("sName").value="";
+document.getElementById("sPhone").value="";
+
+notify(
+"✅ دابینکەر زیادکرا"
+);
+
+renderSuppliers();
+
+}
+
+
+function renderSuppliers(){
+
+const box =
+document.getElementById(
+"supplierTable"
+);
+
+if(!box)return;
+
+if(!db.suppliers.length){
+
+box.innerHTML=`
+
+<div class="empty">
+دابینکەر نییە
+</div>
+
+`;
+
+return;
+
+}
+
+box.innerHTML=`
+
+<div class="table">
+
+<table>
+
+<thead>
+
+<tr>
+<th>ناو</th>
+<th>مۆبایل</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+${db.suppliers.map(x=>`
+
+<tr>
+
+<td>${esc(x.name)}</td>
+
+<td>${esc(x.phone||"-")}</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* ===============================
+   EXPENSES
+================================ */
+
+function addExpense(){
+
+if(!isAdmin())return;
+
+const title =
+document.getElementById("eTitle")
+.value.trim();
+
+const amount =
+Number(
+document.getElementById("eAmount")
+.value
+);
+
+if(!title || amount<=0)return;
+
+db.expenses.push({
+
+id:Date.now(),
+title:title,
+amount:amount,
+date:new Date().toISOString(),
+createdBy:currentUser.name
+
+});
+
+save();
+
+document.getElementById("eTitle").value="";
+document.getElementById("eAmount").value="";
+
+notify(
+"✅ خەرجی تۆمارکرا"
+);
+
+renderExpenses();
+
+}
+
+
+function renderExpenses(){
+
+const box =
+document.getElementById(
+"expenseTable"
+);
+
+if(!box)return;
+
+if(!db.expenses.length){
+
+box.innerHTML=`
+
+<div class="empty">
+خەرجی نییە
+</div>
+
+`;
+
+return;
+
+}
+
+box.innerHTML=`
+
+<div class="table">
+
+<table>
+
+<thead>
+
+<tr>
+<th>بۆچی</th>
+<th>بڕ</th>
+<th>بەروار</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+${db.expenses.map(x=>`
+
+<tr>
+
+<td>${esc(x.title)}</td>
+
+<td>${money(x.amount)}</td>
+
+<td>
+${new Date(x.date)
+.toLocaleString("ku-IQ")}
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* ===============================
+   EMPLOYEES
+================================ */
+
+function addCashier(){
+
+if(!isAdmin()){
+
+notify(
+"❌ تەنها Admin دەتوانێت کاشێر زیاد بکات"
+);
+
+return;
+
+}
+
+const name =
+document.getElementById("emName")
+.value.trim();
+
+const user =
+document.getElementById("emUser")
+.value.trim();
+
+const pass =
+document.getElementById("emPass")
+.value;
+
+if(!name || !user || !pass){
+
+notify(
+"❌ هەموو خانەکان پڕ بکە"
+);
+
+return;
+
+}
+
+if(
+db.employees.some(
+x=>x.user===user
+)
+){
+
+notify(
+"❌ ئەم Username ـە هەیە"
+);
+
+return;
+
+}
+
+db.employees.push({
+
+id:Date.now(),
+name:name,
+user:user,
+password:pass,
+role:"cashier"
+
+});
+
+save();
+
+document.getElementById("emName").value="";
+document.getElementById("emUser").value="";
+document.getElementById("emPass").value="";
+
+notify(
+"✅ کاشێر زیادکرا"
+);
+
+renderEmployees();
+
+}
+
+
+function deleteCashier(id){
+
+if(!isAdmin())return;
+
+if(id===1){
+
+notify(
+"❌ Admin ـی سەرەکی ناتوانرێت بسڕدرێتەوە"
+);
+
+return;
+
+}
+
+db.employees =
+db.employees.filter(
+x=>x.id!==id
+);
+
+save();
+
+notify(
+"🗑️ کاشێر سڕدرایەوە"
+);
+
+renderEmployees();
+
+}
+
+
+function renderEmployees(){
+
+const box =
+document.getElementById(
+"employeeTable"
+);
+
+if(!box)return;
+
+box.innerHTML=`
+
+<div class="table">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ناو</th>
+<th>Username</th>
+<th>پلە</th>
+<th>کردار</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${db.employees.map(e=>`
+
+<tr>
+
+<td>${esc(e.name)}</td>
+
+<td>${esc(e.user)}</td>
+
+<td>
+
+<span class="badge ${e.role}">
+
+${
+e.role==="admin"
+?
+"👑 Admin"
+:
+"🧑‍💼 Cashier"
+}
+
+</span>
+
+</td>
+
+<td>
+
+${
+e.id!==1
+?
+`
+<button
+class="danger"
+onclick="deleteCashier(${e.id})">
+
+🗑️ سڕینەوە
+
+</button>
+`
+:
+"Admin ـی سەرەکی"
+}
+
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* ===============================
+   REPORTS
+================================ */
+
+function totalSales(){
+
+return db.sales.reduce(
+(s,x)=>s+x.total,
+0
+);
+
+}
+
+
+function totalExpenses(){
+
+return db.expenses.reduce(
+(s,x)=>s+x.amount,
+0
+);
+
+}
+
+
+function totalDebt(){
+
+return db.debts
+.filter(x=>!x.paid)
+.reduce(
+(s,x)=>s+x.amount,
+0
+);
+
+}
+
+
+function renderReports(){
+
+const sales =
+document.getElementById(
+"repSales"
+);
+
+if(!sales)return;
+
+sales.textContent =
+money(totalSales());
+
+document.getElementById(
+"repExpenses"
+).textContent =
+money(totalExpenses());
+
+document.getElementById(
+"repProfit"
+).textContent =
+money(
+totalSales()-totalExpenses()
+);
+
+document.getElementById(
+"repOrders"
+).textContent =
+db.sales.length;
+
+const box =
+document.getElementById(
+"reportTable"
+);
+
+if(!db.sales.length){
+
+box.innerHTML=`
+
+<div class="empty">
+فرۆشتن نییە
+</div>
+
+`;
+
+return;
+
+}
+
+box.innerHTML=`
+
+<div class="table">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>کاشێر</th>
+<th>کاڵاکان</th>
+<th>کۆیی</th>
+<th>بەروار</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${db.sales.map(s=>`
+
+<tr>
+
+<td>${esc(s.cashier||"-")}</td>
+
+<td>
+
+${s.items.map(
+x =>
+esc(x.name)+" × "+x.qty
+).join("<br>")}
+
+</td>
+
+<td>${money(s.total)}</td>
+
+<td>
+${new Date(s.date)
+.toLocaleString("ku-IQ")}
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* ===============================
+   HOME
+================================ */
+
+function renderHome(){
+
+const sales =
+document.getElementById(
+"statSales"
+);
+
+if(!sales)return;
+
+sales.textContent =
+money(totalSales());
+
+document.getElementById(
+"statProducts"
+).textContent =
+db.products.length;
+
+document.getElementById(
+"statOrders"
+).textContent =
+db.sales.length;
+
+document.getElementById(
+"statDebt"
+).textContent =
+money(totalDebt());
+
+const box =
+document.getElementById(
+"homeSales"
+);
+
+const list =
+db.sales.slice(0,7);
+
+if(!list.length){
+
+box.innerHTML=`
+
+<tr>
+
+<td colspan="3">
+هێشتا هیچ فرۆشتنێک نییە
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+box.innerHTML =
+list.map(s=>`
+
+<tr>
+
+<td>
+
+${s.items.map(
+x =>
+esc(x.name)+" × "+x.qty
+).join("<br>")}
+
+</td>
+
+<td>${money(s.total)}</td>
+
+<td>
+${new Date(s.date)
+.toLocaleString("ku-IQ")}
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+
+/* ===============================
+   BACKUP
+   ADMIN + CASHIER
+================================ */
+
+function backup(){
+
+if(!currentUser){
+
+notify(
+"❌ تکایە سەرەتا بچۆ ژوورەوە"
+);
+
+return;
+
+}
+
+const backupData={
+version:1,
+createdAt:new Date().toISOString(),
+data:db
+};
+
+const blob =
+new Blob(
+[
+JSON.stringify(
+backupData,
+null,
+2
+)
+],
+{
+type:"application/json"
+}
+);
+
+const url =
+URL.createObjectURL(blob);
+
+const a =
+document.createElement("a");
+
+a.href=url;
+
+a.download =
+"kashir-backup-"+
+new Date()
+.toISOString()
+.slice(0,10)+
+".json";
+
+document.body.appendChild(a);
+
+a.click();
+
+a.remove();
+
+URL.revokeObjectURL(url);
+
+notify(
+"✅ Backup سەرکەوتوو بوو"
+);
+
+}
+
+
+/* ===============================
+   RESTORE
+   ADMIN + CASHIER
+================================ */
+
+function openRestore(){
+
+if(!currentUser){
+
+notify(
+"❌ تکایە سەرەتا بچۆ ژوورەوە"
+);
+
+return;
+
+}
+
+document
+.getElementById("restoreFile")
+.click();
+
+}
+
+
+function restore(file){
+
+if(!currentUser){
+
+notify(
+"❌ تکایە سەرەتا بچۆ ژوورەوە"
+);
+
+return;
+
+}
+
+if(!file)return;
+
+const reader =
+new FileReader();
+
+reader.onload =
+function(){
+
+try{
+
+const backup =
+JSON.parse(
+reader.result
+);
+
+const data =
+backup.data || backup;
+
+if(
+!data.products ||
+!data.sales ||
+!data.employees
+){
+
+throw new Error(
+"Invalid backup"
+);
+
+}
+
+if(
+!confirm(
+"⚠️ Restore داتای ئێستا دەگۆڕێت. دڵنیایت؟"
+)
+){
+
+return;
+
+}
+
+db=data;
+
+save();
+
+cart=[];
+
+renderAll();
+
+notify(
+"✅ Restore سەرکەوتوو بوو"
+);
+
+}
+catch(e){
+
+notify(
+"❌ فایلەکە Backup ـێکی دروست نییە"
+);
+
+}
+
+};
+
+reader.readAsText(file);
+
+}
+
+
+/* ===============================
+   CHANGE ADMIN PASSWORD
+================================ */
+
+function changeAdminPassword(){
+
+if(!isAdmin())return;
+
+const p1 =
+document.getElementById(
+"newPass"
+).value;
+
+const p2 =
+document.getElementById(
+"newPass2"
+).value;
+
+if(!p1 || p1!==p2){
+
+notify(
+"❌ وشەی نهێنییەکان یەک نین"
+);
+
+return;
+
+}
+
+const admin =
+db.employees.find(
+x=>x.id===1
+);
+
+if(!admin)return;
+
+admin.password=p1;
+
+save();
+
+document.getElementById(
+"newPass"
+).value="";
+
+document.getElementById(
+"newPass2"
+).value="";
+
+notify(
+"✅ Password ـی Admin گۆڕدرا"
+);
+
+}
+
+
+/* ===============================
+   RESET
+================================ */
+
+function resetAll(){
+
+if(!isAdmin()){
+
+notify(
+"❌ تەنها Admin"
+);
+
+return;
+
+}
+
+if(
+!confirm(
+"⚠️ هەموو داتا دەسڕدرێتەوە. دڵنیایت؟"
+)
+){
+
+return;
+
+}
+
+localStorage.removeItem(
+"KASHIR_POS_DB"
+);
+
+sessionStorage.removeItem(
+"KASHIR_LOGIN"
+);
+
+location.reload();
+
+}
+
+
+/* ===============================
+   RENDER ALL
+================================ */
+
+function renderAll(){
+
+renderHome();
+renderPOS();
+renderCart();
+renderProducts();
+renderCustomers();
+renderDebts();
+renderSuppliers();
+renderExpenses();
+renderEmployees();
+renderReports();
+
+}
+
+
+/* ===============================
+   AUTO LOGIN
+================================ */
+
+const savedLogin =
+JSON.parse(
+sessionStorage.getItem(
+"KASHIR_LOGIN"
+)
+);
+
+if(savedLogin){
+
+const real =
+db.employees.find(
+x=>x.id===savedLogin.id
+);
+
+if(real){
+
+currentUser=real;
+
+document
+.getElementById("login")
+.classList.add("hidden");
+
+document
+.getElementById("app")
+.classList.remove("hidden");
+
+showUser();
+
+applyPermissions();
+
+renderAll();
+
+}
+
+}
+
+
+/* ===============================
+   ENTER LOGIN
+================================ */
+
+document
+.getElementById("loginPass")
+.addEventListener(
+"keydown",
+function(e){
+
+if(e.key==="Enter"){
+login();
+}
+
+}
+);
+
+</script>
+
+</body>
+</html>
